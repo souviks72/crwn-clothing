@@ -6,6 +6,8 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
@@ -31,6 +33,7 @@ googleAuthProvider.setCustomParameters({
 export const auth = getAuth();
 export const signInWithGooglePopup = () =>
   signInWithPopup(auth, googleAuthProvider);
+
 export const signInWithGoogleRedirect = () =>
   signInWithRedirect(auth, googleAuthProvider);
 
@@ -75,3 +78,10 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 
   return await signInWithEmailAndPassword(auth, email, password);
 };
+
+export const signOutUser = async () => await signOut(auth);
+
+//onAuthStateChnaged is a listener that listens for changes in state of auth
+//it returns a function to close the listener
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);
