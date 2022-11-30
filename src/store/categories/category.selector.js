@@ -1,5 +1,4 @@
 import { createSelector } from "reselect";
-import { CategoriesContext } from "./../../contexts/categories.context";
 
 const selectCategoryReducer = (state) => state.categories;
 
